@@ -99,9 +99,9 @@ EXAMPLES = '''
     - svi
     - nve
 # Admin up all ethernet interfaces
-- nxos_interface: interface=ethernet host=68.170.147.165 admin_state=up
+- nxos_interface: interface=ethernet host={{ inventory_hostname }} admin_state=up
 # Admin down ALL interfaces (physical and logical)
-- nxos_interface: interface=all host=68.170.147.165 admin_state=down
+- nxos_interface: interface=all host={{ inventory_hostname }} admin_state=down
 '''
 RETURN = '''
 proposed:

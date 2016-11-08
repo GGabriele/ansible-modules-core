@@ -75,11 +75,11 @@ options:
 
 EXAMPLES = '''
 # ensure vrrp group 100 and vip 10.1.100.1 is on vlan10
-- nxos_vrrp: interface=vlan10 group=100 vip=10.1.100.1 host=68.170.147.165
+- nxos_vrrp: interface=vlan10 group=100 vip=10.1.100.1 host={{ inventory_hostname }}
 # ensure removal of the vrrp group config # vip is required to ensure the user knows what they are removing
-- nxos_vrrp: interface=vlan10 group=100 vip=10.1.100.1 state=absent host=68.170.147.165
+- nxos_vrrp: interface=vlan10 group=100 vip=10.1.100.1 state=absent host={{ inventory_hostname }}
 # re-config with more params
-- nxos_vrrp: interface=vlan10 group=100 vip=10.1.100.1 preempt=false priority=130 authentication=AUTHKEY host=68.170.147.165
+- nxos_vrrp: interface=vlan10 group=100 vip=10.1.100.1 preempt=false priority=130 authentication=AUTHKEY host={{ inventory_hostname }}
 '''
 
 RETURN = '''

@@ -51,9 +51,9 @@ options:
 
 EXAMPLES = '''
 # test reachability to 8.8.8.8 using mgmt vrf
-- nxos_ping: dest=8.8.8.8 vrf=management host=68.170.147.165
+- nxos_ping: dest=8.8.8.8 vrf=management host={{ inventory_hostname }}
 # Test reachability to a few different public IPs using mgmt vrf
-- nxos_ping: dest=nxos_ping vrf=management host=68.170.147.165
+- nxos_ping: dest=nxos_ping vrf=management host={{ inventory_hostname }}
   with_items:
     - 8.8.8.8
     - 4.4.4.4

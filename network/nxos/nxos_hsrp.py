@@ -82,11 +82,11 @@ options:
 
 EXAMPLES = '''
 # ensure hsrp is configured with following params on a SVI
-- nxos_hsrp: group=10 vip=10.1.1.1 priority=150 interface=vlan10 preempt=enabled host=68.170.147.165
+- nxos_hsrp: group=10 vip=10.1.1.1 priority=150 interface=vlan10 preempt=enabled host={{ inventory_hostname }}
 # ensure hsrp is configured with following params on a SVI
-- nxos_hsrp: group=10 vip=10.1.1.1 priority=150 interface=vlan10 preempt=enabled host=68.170.147.165 auth_type=text auth_string=CISCO
+- nxos_hsrp: group=10 vip=10.1.1.1 priority=150 interface=vlan10 preempt=enabled host={{ inventory_hostname }} auth_type=text auth_string=CISCO
 # removing hsrp config for given interface, group, and vip
-- nxos_hsrp: group=10 interface=vlan10 vip=10.1.1.1 host=68.170.147.165 state=absent
+- nxos_hsrp: group=10 interface=vlan10 vip=10.1.1.1 host={{ inventory_hostname }} state=absent
 '''
 
 RETURN = '''

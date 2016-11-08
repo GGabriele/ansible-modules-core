@@ -53,9 +53,9 @@ options:
 
 EXAMPLES = '''
 # ensure vrf ntc exists on Eth1/1
-- nxos_vrf_interface: vrf=ntc interface=Ethernet1/1 host=68.170.147.165 state=present
+- nxos_vrf_interface: vrf=ntc interface=Ethernet1/1 host={{ inventory_hostname }} state=present
 # ensure ntc VRF does not exist on Eth1/1
-- nxos_vrf_interface: vrf=ntc interface=Ethernet1/1 host=68.170.147.165 state=absent
+- nxos_vrf_interface: vrf=ntc interface=Ethernet1/1 host={{ inventory_hostname }} state=absent
 '''
 
 RETURN = '''
