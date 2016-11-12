@@ -61,12 +61,14 @@ options:
         required: false
         default: false
         choices: ['true','false']
+        version_added: 2.2
     config:
         description:
             - Configuration string to be used for module operations. If not
               specified, the module will use the current running configuration.
         required: false
         default: null
+        version_added: 2.2
     save:
         description:
             - Specify to save the running configuration after
@@ -74,6 +76,7 @@ options:
         required: false
         default: false
         choices: ['true','false']
+        version_added: 2.2
 '''
 
 EXAMPLES = '''
