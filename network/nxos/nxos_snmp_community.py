@@ -56,7 +56,7 @@ options:
         choices: ['present','absent']
     include_defaults:
         description:
-            - Specify to use or not the complete running configuration
+            - Specify to use or not the complete runnning configuration
               for module operations.
         required: false
         default: false
@@ -126,7 +126,7 @@ from ansible.module_utils.shell import ShellError
 try:
     from ansible.module_utils.nxos import get_module
 except ImportError:
-    from ansible.module_utils.nxos import NetworkModule, NetworkError
+    from ansible.module_utils.nxos import NetworkModule
 
 
 def to_list(val):
@@ -348,13 +348,17 @@ def main():
             save=dict(type='bool', default=False)
     )
     module = get_network_module(argument_spec=argument_spec,
-                                required_one_of=[['access', 'group']],
                                 mutually_exclusive=[['access', 'group']],
                                 supports_check_mode=True)
 
     access = module.params['access']
     group = module.params['group']
     state = module.params['state']
+
+    if state == 'present':
+        if not group and not access:
+            module.fail_json(msg='group or access param must be '
+                                 'used when state=present')
 
     if access:
         if access == 'ro':
