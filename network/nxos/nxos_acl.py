@@ -677,10 +677,6 @@ def main():
                                                'ef']),
             state=dict(choices=['absent', 'present', 'delete_acl'],
                        default='present'),
-            protocol=dict(choices=['http', 'https'], default='http'),
-            host=dict(required=True),
-            username=dict(type='str'),
-            password=dict(no_log=True, type='str'),
             include_defaults=dict(default=False),
             config=dict(),
             save=dict(type='bool', default=False)
