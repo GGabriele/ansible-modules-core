@@ -351,12 +351,25 @@ def apply_key_map(key_map, table):
     return new_dict
 
 
+def fix_proposed(proposed_commands):
+    new_proposed = {}
+    for key, value in proposed_commands.items():
+        if key == 'route-target both':
+            new_proposed['route-target export'] = value
+            new_proposed['route-target import'] = value
+        else:
+            new_proposed[key] = value
+    return new_proposed
+
+
 def state_present(module, existing, proposed):
     commands = list()
     parents = list()
     proposed_commands = apply_key_map(PARAM_TO_COMMAND_KEYMAP, proposed)
     existing_commands = apply_key_map(PARAM_TO_COMMAND_KEYMAP, existing)
 
+    if proposed_commands.get('route-target both'):
+        proposed_commands = fix_proposed(proposed_commands)
     for key, value in proposed_commands.iteritems():
         if key.startswith('route-target'):
             if value == ['default']:
@@ -385,7 +398,6 @@ def state_present(module, existing, proposed):
 
     if commands:
         parents = ['evpn', 'vni {0} l2'.format(module.params['vni'])]
-
     return commands, parents
 
 
@@ -445,6 +457,7 @@ def main():
                 value = False
             if existing.get(key) or (not existing.get(key) and value):
                 proposed[key] = value
+
     result = {}
     if state == 'present' or (state == 'absent' and existing):
         candidate = CustomNetworkConfig(indent=3)
